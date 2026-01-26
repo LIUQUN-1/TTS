@@ -1,0 +1,30 @@
+{
+  "version": "0.2.0",
+  "vmArgs": "-Dfile.encoding=UTF-8",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Debug (Launch)-TtsMonitorApplication",
+      "request": "launch",
+      "mainClass": "com.tts.monitor.TtsMonitorApplication",
+      "vmArgs": "-Dfile.encoding=UTF-8"
+    },
+    {
+      "type": "java",
+      "name": "Debug (Attach)",
+      "request": "attach",
+      "hostName": "localhost",
+      "port": 5005,
+      "vmArgs": "-Dfile.encoding=UTF-8"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "调试 tiktok-api.js",
+      "program": "${workspaceFolder}/tiktok-api.js",
+      "console": "integratedTerminal",
+      "outputCapture": "std"
+    }
+  ]
+
+}

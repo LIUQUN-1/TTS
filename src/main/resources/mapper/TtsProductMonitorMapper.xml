@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.tts.monitor.mapper.TtsProductMonitorMapper">
+
+    <!-- 通用结果映射 -->
+    <resultMap id="BaseResultMap" type="com.tts.monitor.entity.TtsProductMonitor">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="product_id" property="productId" jdbcType="VARCHAR"/>
+        <result column="title" property="title" jdbcType="VARCHAR"/>
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR"/>
+        <result column="sale_region" property="saleRegion" jdbcType="VARCHAR"/>
+        <result column="is_valid" property="isValid" jdbcType="TINYINT"/>
+        <result column="confirm_status" property="confirmStatus" jdbcType="TINYINT"/>
+        <result column="commission_rate" property="commissionRate" jdbcType="INTEGER"/>
+        <result column="commission_amount" property="commissionAmount" jdbcType="DECIMAL"/>
+        <result column="commission_currency" property="commissionCurrency" jdbcType="VARCHAR"/>
+        <result column="last_check_time" property="lastCheckTime" jdbcType="TIMESTAMP"/>
+        <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>
+        <result column="updated_at" property="updatedAt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!-- 基础字段列表 -->
+    <sql id="Base_Column_List">
+        id, product_id, title, shop_name, sale_region, is_valid, confirm_status,
+        commission_rate, commission_amount, commission_currency, last_check_time,
+        created_at, updated_at
+    </sql>
+
+    <!-- 分页查询商品ID列表 -->
+    <select id="selectProductIdsByPage" resultType="java.lang.String">
+        SELECT product_id
+        FROM tts_product_monitor
+        ORDER BY id
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <!-- 批量更新商品有效性状态 -->
+    <update id="batchUpdateValidStatus">
+        UPDATE tts_product_monitor
+        SET is_valid = #{isValid},
+            last_check_time = #{lastCheckTime}
+        WHERE product_id IN
+        <foreach collection="productIds" item="productId" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+    </update>
+
+    <!-- 查询失效且未确认的商品列表 -->
+    <select id="selectInvalidAndUnconfirmedProducts" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tts_product_monitor
+        WHERE is_valid = 0
+        AND confirm_status = 0
+        ORDER BY last_check_time DESC
+    </select>
+
+    <!-- 统计总商品数量 -->
+    <select id="countTotalProducts" resultType="java.lang.Long">
+        SELECT COUNT(*)
+        FROM tts_product_monitor
+    </select>
+
+    <!-- 根据商品ID批量查询 -->
+    <select id="selectByProductIds" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"/>
+        FROM tts_product_monitor
+        WHERE product_id IN
+        <foreach collection="productIds" item="productId" open="(" separator="," close=")">
+            #{productId}
+        </foreach>
+    </select>
+
+    <!-- 批量插入（忽略重复） -->
+    <insert id="batchInsertIgnore" parameterType="java.util.List">
+        INSERT IGNORE INTO tts_product_monitor
+        (product_id, title, shop_name, sale_region, is_valid, confirm_status,
+        commission_rate, commission_amount, commission_currency, last_check_time)
+        VALUES
+        <foreach collection="products" item="item" separator=",">
+            (
+            #{item.productId},
+            #{item.title},
+            #{item.shopName},
+            #{item.saleRegion},
+            #{item.isValid},
+            #{item.confirmStatus},
+            #{item.commissionRate},
+            #{item.commissionAmount},
+            #{item.commissionCurrency},
+            #{item.lastCheckTime}
+            )
+        </foreach>
+    </insert>
+
+</mapper>

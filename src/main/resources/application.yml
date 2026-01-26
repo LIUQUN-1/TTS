@@ -1,0 +1,114 @@
+spring:
+  application:
+    name: tts-product-monitor
+  
+  # 数据源配置
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://101.132.36.28:3306/tts?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    username: root
+    password: 123
+    
+    # HikariCP连接池配置
+    hikari:
+      minimum-idle: 5
+      maximum-pool-size: 20
+      connection-timeout: 30000
+      idle-timeout: 600000
+      max-lifetime: 1800000
+      connection-test-query: SELECT 1
+
+  # Jackson配置
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+    default-property-inclusion: non_null
+
+  # Servlet编码配置
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+# MyBatis Plus配置
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.tts.monitor.entity
+  configuration:
+    # 驼峰转下划线
+    map-underscore-to-camel-case: true
+    # 日志实现
+    log-impl: org.apache.ibatis.logging.slf4j.Slf4jImpl
+
+# 服务器配置
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+# TTS API配置
+tts:
+  api:
+    base-url: https://open-api.tiktokglobalshop.com
+    app-key: 6hl73uqvt7f9c
+    app-secret: 1e7b7004e8997442a944ce78a8b9f7c9e837317c
+    access-token: ROW_eRmANQAAAABObwL1-J6nStGZ7hEl4z5uZdtKNGmr3ibKQm-n3liKh1ZkpM7x4Sa3CCrGnTvFFUiy1a4DGDNTm20Th9MrdiBv
+    # 接口版本
+    version: 202509
+    # 请求超时时间（毫秒）
+    timeout: 30000
+    # 限流配置 - 每秒最大请求数（QPS）
+    rate-limit:
+      qps: 50
+    # 批量查询配置
+    batch:
+      # 每批次商品ID数量
+      size: 50
+      # 分页查询每页大小
+      page-size: 1000
+    # 线程池配置
+    thread-pool:
+      core-size: 10
+      max-size: 20
+      queue-capacity: 100
+      thread-name-prefix: tts-worker-
+
+# 定时任务配置
+schedule:
+  # 商品校验定时任务cron表达式（每天凌晨2点执行）
+  product-check:
+    cron: 0 0 2 * * ?
+    enabled: true
+
+# 告警配置
+alert:
+  # 飞书机器人Webhook地址
+  feishu:
+    webhook-url: ${FEISHU_WEBHOOK_URL:}
+    enabled: ${ALERT_ENABLED:true}
+  # 告警消息模板
+  message:
+    title: "【TTS 商品失效告警】"
+    content-template: |
+      商品ID: {productId}
+      商品标题: {title}
+      店铺名称: {shopName}
+      销售地区: {saleRegion}
+      佣金信息: {commission}
+      最后校验时间: {lastCheckTime}
+      
+      请及时核查处理！
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.tts.monitor: DEBUG
+  # 日志文件配置
+  file:
+    path: logs
+    name: logs/tts-monitor.log
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

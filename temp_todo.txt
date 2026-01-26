@@ -1,0 +1,1 @@
+1. 检查src\main\resources\application.yml是否包含了过多的配置，部分业务配置是否应该单独为配置类。
