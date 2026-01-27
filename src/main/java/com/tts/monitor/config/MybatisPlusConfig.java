@@ -25,7 +25,7 @@ public class MybatisPlusConfig {
 
     /**
      * SqlSessionFactory 配置
-     * 解决 Spring Boot 不自动注入 SqlSessionFactory 问题
+     *
      */
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource, MybatisPlusInterceptor interceptor) throws Exception {
