@@ -1,5 +1,4 @@
 {
-  "java.debug.settings.console.encoding": "UTF-8",
   "java.jdt.ls.java.home": "E:\\JDK25.0.1", 
   "maven.executable.path": "E:\\apache-maven-3.9.6\\bin\\mvn.cmd",
     "terminal.integrated.env.windows": {
@@ -7,6 +6,6 @@
   },
   "java.configuration.updateBuildConfiguration": "automatic",
   "java.test.config": {
-    "vmArgs": [ "-Dfile.encoding=UTF-8" ]
+    "vmArgs": [ "-Dfile.encoding=GBK" ]
   }
 }

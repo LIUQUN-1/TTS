@@ -71,9 +71,9 @@ mvn spring-boot:run
 
 ## 技术栈
 
-- Java 17
-- Spring Boot 3.4.4
-- MyBatis Plus 3.5.9
+- Java 25
+- Spring Boot 4.0.1
+- MyBatis Plus 3.7.5
 - MySQL 8.0
 - OkHttp 4.12.0
 - Guava (令牌桶限流)

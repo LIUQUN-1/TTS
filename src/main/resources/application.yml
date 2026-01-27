@@ -51,7 +51,7 @@ tts:
     base-url: https://open-api.tiktokglobalshop.com
     app-key: 6hl73uqvt7f9c
     app-secret: 1e7b7004e8997442a944ce78a8b9f7c9e837317c
-    access-token: ROW_eRmANQAAAABObwL1-J6nStGZ7hEl4z5uZdtKNGmr3ibKQm-n3liKh1ZkpM7x4Sa3CCrGnTvFFUiy1a4DGDNTm20Th9MrdiBv
+    access-token: ROW_7sKy9gAAAABObwL1-J6nStGZ7hEl4z5uZdtKNGmr3ibKQm-n3liKh5hnU97Hc1IHwZ6XIxDUNU2p8vGCpd70QDMLltHm8HXX
     # 接口版本
     version: 202509
     # 请求超时时间（毫秒）
@@ -83,8 +83,8 @@ schedule:
 alert:
   # 飞书机器人Webhook地址
   feishu:
-    webhook-url: ${FEISHU_WEBHOOK_URL:}
-    enabled: ${ALERT_ENABLED:true}
+    webhook-url: https://open.feishu.cn/open-apis/bot/v2/hook/7edfe6c2-e5cb-44e3-bc06-1a991edbfef8
+    enabled: true
   # 告警消息模板
   message:
     title: "【TTS 商品失效告警】"

@@ -176,21 +176,4 @@ public class AlertService {
             return false;
         }
     }
-
-    /**
-     * 手动发送测试告警
-     */
-    public void sendTestAlert() {
-        log.info("发送测试告警");
-        
-        TtsProductMonitor testProduct = new TtsProductMonitor();
-        testProduct.setProductId("TEST_123456");
-        testProduct.setTitle("测试商品");
-        testProduct.setShopName("测试店铺");
-        testProduct.setSaleRegion("ID");
-        testProduct.setCommissionRate(100);
-        testProduct.setLastCheckTime(java.time.LocalDateTime.now());
-
-        sendAlert(testProduct);
-    }
 }

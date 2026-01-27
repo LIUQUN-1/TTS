@@ -6,7 +6,7 @@
       "name": "Debug (Launch)-TtsMonitorApplication",
       "request": "launch",
       "mainClass": "com.tts.monitor.TtsMonitorApplication",
-      "vmArgs": "-Dfile.encoding=UTF-8",
+      "vmArgs": "-Dfile.encoding=GBK",
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal"
     },
@@ -24,6 +24,14 @@
       "program": "${workspaceFolder}/scripts/tiktok-api.js",
       "console": "integratedTerminal",
       "outputCapture": "std"
+    },
+    {
+      
+      "type": "msedge",
+      "request": "launch",
+      "name": "vuejs: vite 调试",
+      "url": "http://localhost:3000",
+      "webRoot": "${workspaceFolder}/frontend/src"
     }
   ]
 }

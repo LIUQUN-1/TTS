@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -258,13 +257,16 @@ public class ProductService {
         }
 
         // 佣金信息
-        if (productInfo.getCommission() != null) {
+        if (productInfo.getCommission() != null 
+            && productInfo.getCommission().getRate() != null
+            && StringUtils.hasText(productInfo.getCommission().getCurrency()) 
+            && StringUtils.hasText(productInfo.getCommission().getAmount())) {
             monitor.setIsValid(TtsProductMonitor.ValidStatus.VALID);
             monitor.setCommissionRate(productInfo.getCommission().getRate());
             monitor.setCommissionCurrency(productInfo.getCommission().getCurrency());
             monitor.setCommissionAmount(productInfo.getCommission().getAmount());
         } else {
-            // 没有佣金信息，标记为失效
+            // 佣金信息不完整或佣金率为0，标记为失效
             monitor.setIsValid(TtsProductMonitor.ValidStatus.INVALID);
         }
 
