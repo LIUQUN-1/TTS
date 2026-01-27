@@ -12,7 +12,7 @@
         <result column="is_valid" property="isValid" jdbcType="TINYINT"/>
         <result column="confirm_status" property="confirmStatus" jdbcType="TINYINT"/>
         <result column="commission_rate" property="commissionRate" jdbcType="INTEGER"/>
-        <result column="commission_amount" property="commissionAmount" jdbcType="DECIMAL"/>
+        <result column="commission_amount" property="commissionAmount" jdbcType="VARCHAR"/>
         <result column="commission_currency" property="commissionCurrency" jdbcType="VARCHAR"/>
         <result column="last_check_time" property="lastCheckTime" jdbcType="TIMESTAMP"/>
         <result column="created_at" property="createdAt" jdbcType="TIMESTAMP"/>

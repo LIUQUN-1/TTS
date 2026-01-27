@@ -262,16 +262,7 @@ public class ProductService {
             monitor.setIsValid(TtsProductMonitor.ValidStatus.VALID);
             monitor.setCommissionRate(productInfo.getCommission().getRate());
             monitor.setCommissionCurrency(productInfo.getCommission().getCurrency());
-            
-            // 转换金额
-            if (StringUtils.hasText(productInfo.getCommission().getAmount())) {
-                try {
-                    monitor.setCommissionAmount(new BigDecimal(productInfo.getCommission().getAmount()));
-                } catch (NumberFormatException e) {
-                    log.warn("佣金金额格式错误 - 商品ID: {}, 金额: {}", 
-                        productInfo.getId(), productInfo.getCommission().getAmount());
-                }
-            }
+            monitor.setCommissionAmount(productInfo.getCommission().getAmount());
         } else {
             // 没有佣金信息，标记为失效
             monitor.setIsValid(TtsProductMonitor.ValidStatus.INVALID);

@@ -5,7 +5,7 @@ spring:
   # 数据源配置
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://101.132.36.28:3306/tts?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://127.0.0.1:3306/tts?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
     password: 123
     
@@ -44,8 +44,6 @@ mybatis-plus:
 # 服务器配置
 server:
   port: 8080
-  servlet:
-    context-path: /api
 
 # TTS API配置
 tts:
@@ -109,6 +107,3 @@ logging:
   file:
     path: logs
     name: logs/tts-monitor.log
-  pattern:
-    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
-    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"

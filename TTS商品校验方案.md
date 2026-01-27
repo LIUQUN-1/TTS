@@ -42,7 +42,7 @@
 | `is_valid`            | TINYINT(1)      | 是   | 1                 | 是否有效：1-有效, 0-失效                   |
 | `confirm_status`      | TINYINT(1)      | 是   | 0                 | 确认状态：0-待处理, 1-运营已确认(跳过告警) |
 | `commission_rate`     | INT             | 否   | NULL              | 佣金率（万分比，如 100 代表 1%）           |
-| `commission_amount`   | DECIMAL(15, 4)  | 否   | NULL              | 预估佣金金额                               |
+| `commission_amount`   | VARCHAR(32)     | 否   | NULL              | 预估佣金金额                               |
 | `commission_currency` | VARCHAR(10)         | 否   | NULL              | 佣金货币单位 (如 USD, IDR)                 |
 | `last_check_time`     | DATETIME        | 否   | NULL              | 最后一次系统校验的时间                 |
 | `created_at`          | TIMESTAMP       | 是   | CURRENT_TIMESTAMP | 记录创建时间                               |
@@ -60,7 +60,7 @@ CREATE TABLE `tts_product_monitor` (
   `is_valid` tinyint(1) NOT NULL DEFAULT 1 COMMENT '是否有效：1-有效, 0-失效',
   `confirm_status` tinyint(1) NOT NULL DEFAULT 0 COMMENT '确认状态：0-待处理, 1-运营已确认(跳过告警)',
   `commission_rate` int DEFAULT NULL COMMENT '佣金率（万分比，如 100 代表 1%）',
-  `commission_amount` decimal(15,4) DEFAULT NULL COMMENT '预估佣金金额',
+  `commission_amount` varchar(32) DEFAULT NULL COMMENT '预估佣金金额',
   `commission_currency` varchar(10) DEFAULT NULL COMMENT '佣金货币单位 (如 USD, IDR)',
   `last_check_time` datetime DEFAULT NULL COMMENT '最后一次系统校验的时间',
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录创建时间',

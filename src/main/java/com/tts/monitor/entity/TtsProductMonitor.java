@@ -70,7 +70,7 @@ public class TtsProductMonitor implements Serializable {
      * 预估佣金金额
      */
     @TableField("commission_amount")
-    private BigDecimal commissionAmount;
+    private String commissionAmount;
 
     /**
      * 佣金货币单位 (如 USD, IDR)

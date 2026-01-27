@@ -1,9 +1,7 @@
 package com.tts.monitor.config;
 
 import com.baomidou.mybatisplus.annotation.DbType;
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.MybatisConfiguration;
-import com.baomidou.mybatisplus.core.config.GlobalConfig;
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
 import com.baomidou.mybatisplus.extension.plugins.MybatisPlusInterceptor;
 import com.baomidou.mybatisplus.extension.plugins.inner.PaginationInnerInterceptor;
@@ -27,10 +25,10 @@ import java.time.LocalDateTime;
 @Configuration
 public class MybatisPlusConfig {
 
-    // /**
-    //  * SqlSessionFactory 配置
-    //  * 解决 Spring Boot 不自动注入 SqlSessionFactory 问题
-    //  */
+    /**
+     * SqlSessionFactory 配置
+     * 解决 Spring Boot 不自动注入 SqlSessionFactory 问题
+     */
     @Bean
     public SqlSessionFactory sqlSessionFactory(DataSource dataSource, MybatisPlusInterceptor interceptor) throws Exception {
         MybatisSqlSessionFactoryBean factoryBean = new MybatisSqlSessionFactoryBean();
