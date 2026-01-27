@@ -22,7 +22,7 @@ public class TtsSignatureUtil {
      * 生成签名
      * 
      * @param params 查询参数（不包含sign和access_token）
-     * @param body 请求体（POST请求时）
+     * @param body 请求体（POST请求时，非 multipart/form-data）
      * @param secret 应用密钥
      * @param pathname 请求路径（如：/affiliate_creator/202509/open_collaborations/products）
      * @param contentType 内容类型
@@ -80,18 +80,6 @@ public class TtsSignatureUtil {
             log.error("生成签名失败", e);
             throw new RuntimeException("生成签名失败: " + e.getMessage(), e);
         }
-    }
-
-    /**
-     * 生成签名（简化版，用于 GET 请求或无 body 的 POST 请求）
-     * 
-     * @param params 查询参数
-     * @param secret 应用密钥
-     * @param pathname 请求路径
-     * @return 签名字符串
-     */
-    public static String generateSign(Map<String, String> params, String secret, String pathname) {
-        return generateSign(params, null, secret, pathname, "application/json");
     }
 
     /**

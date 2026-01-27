@@ -17,7 +17,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * TTS API 客户端工具类
+ * TTS API 工具类
  * 
  */
 @Slf4j
@@ -62,8 +62,10 @@ public class TtsApiClient {
             // 生成签名
             String sign = TtsSignatureUtil.generateSign(
                 params,
+                null,
                 ttsApiProperties.getAppSecret(),
-                API_PATH
+                API_PATH,
+                CONTENT_TYPE_JSON
             );
             params.put("sign", sign);
 
