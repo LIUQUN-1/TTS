@@ -23,6 +23,7 @@ import ProductList from './components/ProductList.vue'
 html, body, #app {
   height: 100%;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-size: 16px;
 }
 
 .app-container {
@@ -36,6 +37,7 @@ html, body, #app {
   align-items: center;
   padding: 0 30px;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  flex-shrink: 0;
 }
 
 .app-header h1 {
@@ -43,8 +45,26 @@ html, body, #app {
   font-weight: 500;
 }
 
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0 15px;
+  }
+  
+  .app-header h1 {
+    font-size: 18px;
+  }
+}
+
 .app-main {
   background: #f5f7fa;
   padding: 20px;
+  flex: 1;
+  overflow: auto;
+}
+
+@media (max-width: 768px) {
+  .app-main {
+    padding: 10px;
+  }
 }
 </style>
