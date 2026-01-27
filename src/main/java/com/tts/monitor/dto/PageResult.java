@@ -9,8 +9,6 @@ import java.util.List;
 /**
  * 分页结果DTO
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Data
 @NoArgsConstructor

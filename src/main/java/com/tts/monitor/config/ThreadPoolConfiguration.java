@@ -11,8 +11,6 @@ import java.util.concurrent.*;
 /**
  * 线程池配置类
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Slf4j
 @Configuration
@@ -73,16 +71,16 @@ public class ThreadPoolConfiguration {
             this.executor = executor;
             Runtime.getRuntime().addShutdownHook(new Thread(() -> {
                 log.info("开始关闭线程池...");
-                executor.shutdown();
+                this.executor.shutdown();
                 try {
-                    if (!executor.awaitTermination(60, TimeUnit.SECONDS)) {
-                        executor.shutdownNow();
+                    if (!this.executor.awaitTermination(60, TimeUnit.SECONDS)) {
+                        this.executor.shutdownNow();
                         log.warn("线程池未能在60秒内正常关闭，强制关闭");
                     } else {
                         log.info("线程池已正常关闭");
                     }
                 } catch (InterruptedException e) {
-                    executor.shutdownNow();
+                    this.executor.shutdownNow();
                     Thread.currentThread().interrupt();
                 }
             }));

@@ -10,8 +10,6 @@ import java.util.List;
 /**
  * TTS商品监控 Mapper 接口
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Mapper
 public interface TtsProductMonitorMapper extends BaseMapper<TtsProductMonitor> {

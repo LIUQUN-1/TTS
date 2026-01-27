@@ -15,8 +15,6 @@ import java.util.concurrent.CompletableFuture;
 /**
  * 任务控制器
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Slf4j
 @RestController

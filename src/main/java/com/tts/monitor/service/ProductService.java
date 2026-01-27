@@ -22,8 +22,6 @@ import java.util.stream.Collectors;
 /**
  * 商品监控服务类
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Slf4j
 @Service

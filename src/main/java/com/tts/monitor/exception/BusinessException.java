@@ -3,8 +3,6 @@ package com.tts.monitor.exception;
 /**
  * 业务异常类
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 public class BusinessException extends RuntimeException {
 

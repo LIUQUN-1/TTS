@@ -8,7 +8,7 @@
       "mainClass": "com.tts.monitor.TtsMonitorApplication",
       "vmArgs": "-Dfile.encoding=GBK",
       "cwd": "${workspaceFolder}",
-      "console": "integratedTerminal"
+      "console": "internalConsole"
     },
     {
       "type": "java",

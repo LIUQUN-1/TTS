@@ -3,8 +3,6 @@ package com.tts.monitor.exception;
 /**
  * TTS API 异常类
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 public class TtsApiException extends RuntimeException {
 

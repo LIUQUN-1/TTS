@@ -7,8 +7,6 @@ import org.springframework.stereotype.Component;
 /**
  * 告警配置属性
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Data
 @Component

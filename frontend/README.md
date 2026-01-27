@@ -73,7 +73,7 @@ frontend/
 - `GET /TTS/monitor/products/count` - 商品总数
 
 ### 任务控制
-- `POST /TTS/monitor/task/trigger` - 手动触发校验
+- `POST /TTS/monitor/task/execute` - 手动触发校验
 
 ## 开发说明
 

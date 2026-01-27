@@ -10,8 +10,6 @@ import org.springframework.context.annotation.Configuration;
 /**
  * Jackson 配置类
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Configuration
 public class JacksonConfig {

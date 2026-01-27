@@ -78,7 +78,7 @@ export const taskApi = {
    */
   triggerCheck() {
     return request({
-      url: '/TTS/monitor/task/trigger',
+      url: '/TTS/monitor/task/execute',
       method: 'post'
     })
   }

@@ -19,8 +19,6 @@ import java.time.LocalDateTime;
 /**
  * MyBatis Plus 配置类
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Configuration
 public class MybatisPlusConfig {

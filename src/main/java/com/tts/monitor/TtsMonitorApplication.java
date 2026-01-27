@@ -8,8 +8,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 /**
  * TTS Product Monitor 应用启动类
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @SpringBootApplication
 @EnableScheduling

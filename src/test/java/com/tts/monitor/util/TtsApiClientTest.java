@@ -13,8 +13,6 @@ import static org.junit.jupiter.api.Assertions.*;
  * TtsApiClient 集成测试
  * 使用真实的 API 调用和配置
  *
- * @author TTS Monitor System
- * @since 2026-01-26
  */
 @SpringBootTest
 public class TtsApiClientTest {

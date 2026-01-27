@@ -11,8 +11,6 @@ import org.springframework.stereotype.Component;
 /**
  * 商品校验定时任务
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Slf4j
 @Component

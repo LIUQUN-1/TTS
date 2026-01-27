@@ -19,8 +19,6 @@ import java.util.Map;
 /**
  * TTS API 客户端工具类
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Slf4j
 @Component

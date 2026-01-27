@@ -7,8 +7,6 @@ import java.util.List;
 /**
  * TTS API 响应DTO
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Data
 public class TtsApiResponse {

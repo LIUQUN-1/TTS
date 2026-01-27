@@ -8,7 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 /**
  * 告警服务测试类
  * 
- * @author TTS Monitor System
+ * 
  * @since 2026-01-27
  */
 @SpringBootTest
@@ -23,14 +23,6 @@ public class AlertServiceTest {
      */
     @Test
     void testSendAlert() {
-        TtsProductMonitor testProduct = new TtsProductMonitor();
-        testProduct.setProductId("TEST_123456");
-        testProduct.setTitle("测试商品");
-        testProduct.setShopName("测试店铺");
-        testProduct.setSaleRegion("ID");
-        testProduct.setCommissionRate(100);
-        testProduct.setLastCheckTime(java.time.LocalDateTime.now());
-
         // 发送测试告警
         alertService.executeAlert();
     }

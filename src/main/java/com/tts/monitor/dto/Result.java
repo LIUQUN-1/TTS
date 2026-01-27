@@ -5,8 +5,6 @@ import lombok.Data;
 /**
  * 统一响应结果DTO
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Data
 public class Result<T> {

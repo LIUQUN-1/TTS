@@ -3,14 +3,11 @@ package com.tts.monitor.entity;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.Data;
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 /**
  * TTS商品监控实体类
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Data
 @TableName("tts_product_monitor")

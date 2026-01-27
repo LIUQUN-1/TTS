@@ -9,8 +9,6 @@ import java.time.Duration;
 /**
  * TTS API 配置类
  *
- * @author TTS Monitor System
- * @since 2026-01-26
  */
 @Configuration
 public class TtsApiConfig {

@@ -18,8 +18,6 @@ import java.util.stream.Collectors;
 /**
  * 商品校验服务
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Slf4j
 @Service

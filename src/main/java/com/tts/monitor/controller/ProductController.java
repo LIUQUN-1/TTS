@@ -14,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 /**
  * 商品监控控制器
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Slf4j
 @RestController

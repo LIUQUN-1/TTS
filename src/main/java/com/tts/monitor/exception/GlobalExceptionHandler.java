@@ -15,8 +15,6 @@ import java.util.stream.Collectors;
 /**
  * 全局异常处理器
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Slf4j
 @RestControllerAdvice

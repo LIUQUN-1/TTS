@@ -11,8 +11,6 @@ import java.util.*;
  * TTS API 签名工具类
  * 参考官方文档：https://partner.tiktokshop.com/docv2/page/sign-your-api-request
  * 
- * @author TTS Monitor System
- * @since 2026-01-23
  */
 @Slf4j
 public class TtsSignatureUtil {
