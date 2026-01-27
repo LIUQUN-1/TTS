@@ -3,11 +3,12 @@ spring:
     name: tts-product-monitor
   
   # 数据源配置
+  # 101.132.36.28:3567
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/tts?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://101.132.36.28:3567/tts?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
     username: root
-    password: 123
+    password: junliu46
     
     # HikariCP连接池配置
     hikari:
@@ -82,8 +83,9 @@ schedule:
 # 告警配置
 alert:
   # 飞书机器人Webhook地址
+  # https://open.feishu.cn/open-apis/bot/v2/hook/7edfe6c2-e5cb-44e3-bc06-1a991edb
   feishu:
-    webhook-url: https://open.feishu.cn/open-apis/bot/v2/hook/7edfe6c2-e5cb-44e3-bc06-1a991edbfef8
+    webhook-url: https://open.xfchat.iflytek.com/open-apis/bot/v2/hook/767bcec6-b7c4-4006-987c-a82f77fd5c18
     enabled: true
   # 告警消息模板
   message:
