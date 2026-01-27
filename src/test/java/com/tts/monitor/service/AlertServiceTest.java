@@ -1,6 +1,5 @@
 package com.tts.monitor.service;
 
-import com.tts.monitor.entity.TtsProductMonitor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

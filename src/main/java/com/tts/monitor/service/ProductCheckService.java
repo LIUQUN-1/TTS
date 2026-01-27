@@ -9,6 +9,7 @@ import com.tts.monitor.util.TtsApiClient;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -121,7 +122,8 @@ public class ProductCheckService {
     }
 
     /**
-     * 处理一批商品（分批请求）
+     * 按分页处理商品
+     * 按 batchSize 分割批次，并发调用TTS API校验商品状态
      */
     private CheckResult processProductBatch(List<String> productIds, int batchSize) {
         CheckResult result = new CheckResult();
@@ -130,10 +132,10 @@ public class ProductCheckService {
         List<List<String>> batches = partitionList(productIds, batchSize);
         log.debug("将 {} 个商品分成 {} 个批次", productIds.size(), batches.size());
         
-        // 使用 CountDownLatch 等待所有批次完成
+        // 使用CountDownLatch等待所有批次完成
         CountDownLatch latch = new CountDownLatch(batches.size());
         
-        // 并发结果收集（线程安全）
+        // 并发结果收集
         List<BatchCheckResult> batchResults = new CopyOnWriteArrayList<>();
         
         // 提交所有批次任务到线程池
@@ -159,9 +161,9 @@ public class ProductCheckService {
         
         // 等待所有批次完成
         try {
-            boolean finished = latch.await(30, TimeUnit.MINUTES);
+            boolean finished = latch.await(10, TimeUnit.MINUTES);
             if (!finished) {
-                log.error("批次处理超时（30分钟）");
+                log.error("批次处理超时（10分钟）");
             }
         } catch (InterruptedException e) {
             log.error("等待批次完成时被中断", e);
@@ -225,11 +227,16 @@ public class ProductCheckService {
             for (String productId : productIds) {
                 TtsApiResponse.ProductInfo productInfo = productMap.get(productId);
                 
-                if (productInfo != null && productInfo.getCommission() != null) {
-                    // 有佣金信息，标记为有效
+                // 佣金信息完整性校验：commission、rate、currency、amount 都必须有效
+                if (productInfo != null 
+                    && productInfo.getCommission() != null
+                    && productInfo.getCommission().getRate() != null
+                    && StringUtils.hasText(productInfo.getCommission().getCurrency())
+                    && StringUtils.hasText(productInfo.getCommission().getAmount())) {
+                    // 佣金信息完整，标记为有效
                     validProductIds.add(productId);
                 } else {
-                    // 无佣金信息或未返回，标记为失效
+                    // 佣金信息不完整或未返回，标记为失效
                     invalidProductIds.add(productId);
                 }
             }

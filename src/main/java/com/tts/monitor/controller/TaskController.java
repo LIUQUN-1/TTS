@@ -1,6 +1,7 @@
 package com.tts.monitor.controller;
 
 import com.tts.monitor.dto.Result;
+import com.tts.monitor.service.AlertService;
 import com.tts.monitor.service.ProductCheckService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,6 +24,7 @@ import java.util.concurrent.CompletableFuture;
 public class TaskController {
 
     private final ProductCheckService productCheckService;
+    private final AlertService alertService;
 
     /**
      * 手动触发商品校验任务
@@ -40,6 +42,11 @@ public class TaskController {
                 log.info("手动校验任务完成 - 成功: {}, 总数: {}, 有效: {}, 失效: {}, 失败: {}, 耗时: {}ms",
                     result.isSuccess(), result.getTotalCount(), result.getValidCount(),
                     result.getInvalidCount(), result.getFailedCount(), result.getDuration());
+                
+                // 校验完成后执行告警检查
+                if (result.isSuccess() && result.getInvalidCount() > 0) {
+                    alertService.executeAlert();
+                }
             } catch (Exception e) {
                 log.error("手动校验任务执行异常", e);
             }

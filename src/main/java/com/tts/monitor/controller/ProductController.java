@@ -5,6 +5,7 @@ import com.tts.monitor.dto.ProductAddRequest;
 import com.tts.monitor.dto.ProductQueryDTO;
 import com.tts.monitor.dto.Result;
 import com.tts.monitor.entity.TtsProductMonitor;
+import com.tts.monitor.service.AlertService;
 import com.tts.monitor.service.ProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 public class ProductController {
 
     private final ProductService productService;
+    private final AlertService alertService;
 
     /**
      * 获取商品监控列表
@@ -46,6 +48,19 @@ public class ProductController {
     public Result<Integer> addProducts(@Valid @RequestBody ProductAddRequest request) {
         log.info("新增监控商品 - 数量: {}", request.getProductIds().size());
         int count = productService.addProducts(request.getProductIds());
+        
+        // 新增商品后执行告警检查（异步）
+        if (count > 0) {
+            java.util.concurrent.CompletableFuture.runAsync(() -> {
+                try {
+                    log.info("新增 {} 个商品后，开始执行告警检查", count);
+                    alertService.executeAlert();
+                } catch (Exception e) {
+                    log.error("新增商品后告警检查失败", e);
+                }
+            });
+        }
+        
         return Result.success("成功新增 " + count + " 个商品", count);
     }
 
