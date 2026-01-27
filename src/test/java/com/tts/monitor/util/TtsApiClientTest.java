@@ -49,17 +49,4 @@ public class TtsApiClientTest {
             System.out.println("API 调用失败: " + result.getMessage());
         }
     }
-
-    @Test
-    void testGenerateCurlCommand() {
-        // ...existing code...
-        List<String> productIds = List.of("123", "456");
-        String curlCommand = ttsApiClient.generateCurlCommand(productIds);
-
-        assertNotNull(curlCommand);
-        assertTrue(curlCommand.contains("curl -X POST"));
-        assertTrue(curlCommand.contains("open-api.tiktokglobalshop.com"));
-        assertTrue(curlCommand.contains("Content-Type: application/json"));
-        assertTrue(curlCommand.contains("x-tts-access-token"));
-    }
 }

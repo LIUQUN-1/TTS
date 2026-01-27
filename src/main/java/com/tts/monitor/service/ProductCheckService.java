@@ -6,6 +6,8 @@ import com.tts.monitor.dto.tts.TtsApiResponse;
 import com.tts.monitor.entity.TtsProductMonitor;
 import com.tts.monitor.mapper.TtsProductMonitorMapper;
 import com.tts.monitor.util.TtsApiClient;
+
+import lombok.Data;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -29,7 +31,7 @@ public class ProductCheckService {
     private final TtsApiProperties ttsApiProperties;
     private final ThreadPoolExecutor productCheckExecutor;
     
-    // 令牌桶限流器（50 QPS）
+    // 令牌桶限流器
     private final RateLimiter rateLimiter;
 
     public ProductCheckService(
@@ -42,7 +44,7 @@ public class ProductCheckService {
         this.ttsApiProperties = ttsApiProperties;
         this.productCheckExecutor = productCheckExecutor;
         
-        // 初始化令牌桶，每秒固定产生50个令牌
+        // 初始化令牌桶，每秒固定产生指定数量的令牌
         int qps = ttsApiProperties.getRateLimit().getQps();
         this.rateLimiter = RateLimiter.create(qps);
         log.info("初始化令牌桶限流器 - QPS: {}", qps);
@@ -90,8 +92,6 @@ public class ProductCheckService {
                     log.warn("第 {} 页没有查询到商品", page + 1);
                     continue;
                 }
-                
-                log.debug("第 {} 页查询到 {} 个商品ID", page + 1, productIds.size());
                 
                 // 处理当前页的商品
                 CheckResult pageResult = processProductBatch(productIds, batchSize);
@@ -286,7 +286,9 @@ public class ProductCheckService {
 
     /**
      * 校验结果统计
+     * 打印日志使用
      */
+    @Data
     public static class CheckResult {
         private boolean success = true;
         private int totalCount = 0;
@@ -304,41 +306,18 @@ public class ProductCheckService {
             this.failedCount += other.failedCount;
         }
 
-        // Getters and Setters
-        public boolean isSuccess() { return success; }
-        public void setSuccess(boolean success) { this.success = success; }
-        public int getTotalCount() { return totalCount; }
-        public void setTotalCount(int totalCount) { this.totalCount = totalCount; }
-        public int getCheckedCount() { return checkedCount; }
-        public void setCheckedCount(int checkedCount) { this.checkedCount = checkedCount; }
-        public int getValidCount() { return validCount; }
-        public void setValidCount(int validCount) { this.validCount = validCount; }
-        public int getInvalidCount() { return invalidCount; }
-        public void setInvalidCount(int invalidCount) { this.invalidCount = invalidCount; }
-        public int getFailedCount() { return failedCount; }
-        public void setFailedCount(int failedCount) { this.failedCount = failedCount; }
-        public long getDuration() { return duration; }
-        public void setDuration(long duration) { this.duration = duration; }
-        public String getErrorMessage() { return errorMessage; }
-        public void setErrorMessage(String errorMessage) { this.errorMessage = errorMessage; }
     }
 
     /**
      * 批次校验结果
+     * 
      */
+    @Data
     private static class BatchCheckResult {
         private int checkedCount = 0;
         private int validCount = 0;
         private int invalidCount = 0;
         private int failedCount = 0;
 
-        public int getCheckedCount() { return checkedCount; }
-        public void setCheckedCount(int checkedCount) { this.checkedCount = checkedCount; }
-        public int getValidCount() { return validCount; }
-        public void setValidCount(int validCount) { this.validCount = validCount; }
-        public int getInvalidCount() { return invalidCount; }
-        public void setInvalidCount(int invalidCount) { this.invalidCount = invalidCount; }
-        public int getFailedCount() { return failedCount; }
-        public void setFailedCount(int failedCount) { this.failedCount = failedCount; }
     }
 }

@@ -135,29 +135,4 @@ public class TtsApiClient {
         return response;
     }
 
-    /**
-     * 生成 curl 命令（用于调试）
-     */
-    public String generateCurlCommand(List<String> productIds) {
-        if (productIds == null || productIds.isEmpty()) {
-            return "";
-        }
-
-        long timestamp = System.currentTimeMillis() / 1000;
-        Map<String, String> params = new HashMap<>();
-        params.put("app_key", ttsApiProperties.getAppKey());
-        params.put("timestamp", String.valueOf(timestamp));
-        params.put("product_ids", String.join(",", productIds));
-
-        String sign = TtsSignatureUtil.generateSign(params, ttsApiProperties.getAppSecret(), API_PATH);
-        params.put("sign", sign);
-
-        String queryString = TtsSignatureUtil.buildQueryString(params);
-        String fullUrl = ttsApiProperties.getBaseUrl() + API_PATH + "?" + queryString;
-
-        return String.format("curl -X POST \"%s\" \\\n  -H \"%s: %s\" \\\n  -H \"%s: %s\"",
-            fullUrl,
-            HEADER_CONTENT_TYPE, CONTENT_TYPE_JSON,
-            HEADER_ACCESS_TOKEN, ttsApiProperties.getAccessToken());
-    }
 }
