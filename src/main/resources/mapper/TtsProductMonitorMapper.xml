@@ -55,12 +55,6 @@
         ORDER BY last_check_time DESC
     </select>
 
-    <!-- 统计总商品数量 -->
-    <select id="countTotalProducts" resultType="java.lang.Long">
-        SELECT COUNT(*)
-        FROM tts_product_monitor
-    </select>
-
     <!-- 根据商品ID批量查询 -->
     <select id="selectByProductIds" resultMap="BaseResultMap">
         SELECT

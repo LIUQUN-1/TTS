@@ -43,13 +43,6 @@ public interface TtsProductMonitorMapper extends BaseMapper<TtsProductMonitor> {
     List<TtsProductMonitor> selectInvalidAndUnconfirmedProducts();
 
     /**
-     * 统计总商品数量
-     * 
-     * @return 总数量
-     */
-    Long countTotalProducts();
-
-    /**
      * 根据商品ID批量查询（用于校验是否已存在）
      * 
      * @param productIds 商品ID列表

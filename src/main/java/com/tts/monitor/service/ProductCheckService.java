@@ -63,7 +63,7 @@ public class ProductCheckService {
         
         try {
             // 统计总商品数
-            Long totalCount = productMapper.countTotalProducts();
+            Long totalCount = productMapper.selectCount(null);
             log.info("商品总数: {}", totalCount);
             
             if (totalCount == 0) {
@@ -123,12 +123,11 @@ public class ProductCheckService {
 
     /**
      * 按分页处理商品
-     * 按 batchSize 分割批次，并发调用TTS API校验商品状态
+     * 按 batchSize 分割批次，一次TTS请求查询batchSize个商品，并发调用TTS API校验商品状态
      */
     private CheckResult processProductBatch(List<String> productIds, int batchSize) {
         CheckResult result = new CheckResult();
         
-        // 将商品ID列表分成多个批次
         List<List<String>> batches = partitionList(productIds, batchSize);
         log.debug("将 {} 个商品分成 {} 个批次", productIds.size(), batches.size());
         
