@@ -20,16 +20,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 告警服务
+ * 告警服务实现类
  * 
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AlertService {
+public class AlertService implements IAlertService {
 
     private final AlertProperties alertProperties;
-    private final ProductService productService;
+    private final IProductService productService;
     private final ObjectMapper objectMapper;
 
     // 告警专用日志标记
@@ -103,14 +103,6 @@ public class AlertService {
         
         // 格式化佣金信息
         String commission = "无";
-        if (product.getCommissionRate() != null) {
-            double rate = product.getCommissionRate() / 100.0;
-            commission = String.format("%.2f%%", rate);
-            if (product.getCommissionAmount() != null && product.getCommissionCurrency() != null) {
-                commission += String.format(", %s %s", 
-                    product.getCommissionCurrency(), product.getCommissionAmount());
-            }
-        }
 
         // 格式化最后校验时间
         String lastCheckTime = product.getLastCheckTime() != null 

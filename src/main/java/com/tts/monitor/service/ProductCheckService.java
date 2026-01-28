@@ -19,12 +19,12 @@ import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
 /**
- * 商品校验服务
+ * 商品校验服务实现类
  * 
  */
 @Slf4j
 @Service
-public class ProductCheckService {
+public class ProductCheckService implements IProductCheckService {
 
     private final TtsProductMonitorMapper productMapper;
     private final TtsApiClient ttsApiClient;

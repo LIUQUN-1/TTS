@@ -87,7 +87,7 @@
     </logger>
     
     <!-- 告警专用Logger -->
-    <logger name="com.tts.monitor.alert" level="INFO" additivity="false">
+    <logger name="com.tts.monitor.service.AlertService" level="INFO" additivity="false">
         <appender-ref ref="CONSOLE"/>
         <appender-ref ref="ALERT_FILE"/>
         <appender-ref ref="FILE"/>

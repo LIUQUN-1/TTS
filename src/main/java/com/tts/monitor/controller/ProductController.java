@@ -5,8 +5,8 @@ import com.tts.monitor.dto.ProductAddRequest;
 import com.tts.monitor.dto.ProductQueryDTO;
 import com.tts.monitor.dto.Result;
 import com.tts.monitor.entity.TtsProductMonitor;
-import com.tts.monitor.service.AlertService;
-import com.tts.monitor.service.ProductService;
+import com.tts.monitor.service.IAlertService;
+import com.tts.monitor.service.IProductService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class ProductController {
 
-    private final ProductService productService;
-    private final AlertService alertService;
+    private final IProductService productService;
+    private final IAlertService alertService;
 
     /**
      * 获取商品监控列表

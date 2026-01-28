@@ -14,7 +14,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class AlertServiceTest {
 
     @Autowired
-    private AlertService alertService;
+    private IAlertService alertService;
 
     /**
      * 测试发送告警消息

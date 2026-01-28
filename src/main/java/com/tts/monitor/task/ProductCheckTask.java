@@ -1,6 +1,7 @@
 package com.tts.monitor.task;
 
-import com.tts.monitor.service.AlertService;
+import com.tts.monitor.service.IAlertService;
+import com.tts.monitor.service.IProductCheckService;
 import com.tts.monitor.service.ProductCheckService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,8 +19,8 @@ import org.springframework.stereotype.Component;
 @ConditionalOnProperty(prefix = "schedule.product-check", name = "enabled", havingValue = "true")
 public class ProductCheckTask {
 
-    private final ProductCheckService productCheckService;
-    private final AlertService alertService;
+    private final IProductCheckService productCheckService;
+    private final IAlertService alertService;
 
     /**
      * 每日定时校验任务

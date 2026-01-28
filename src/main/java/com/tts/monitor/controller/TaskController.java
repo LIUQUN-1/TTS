@@ -1,7 +1,8 @@
 package com.tts.monitor.controller;
 
 import com.tts.monitor.dto.Result;
-import com.tts.monitor.service.AlertService;
+import com.tts.monitor.service.IAlertService;
+import com.tts.monitor.service.IProductCheckService;
 import com.tts.monitor.service.ProductCheckService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -23,8 +24,8 @@ import java.util.concurrent.CompletableFuture;
 @RequiredArgsConstructor
 public class TaskController {
 
-    private final ProductCheckService productCheckService;
-    private final AlertService alertService;
+    private final IProductCheckService productCheckService;
+    private final IAlertService alertService;
 
     /**
      * 手动触发商品校验任务

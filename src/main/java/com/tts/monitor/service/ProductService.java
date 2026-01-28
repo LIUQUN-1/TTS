@@ -20,13 +20,13 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * 商品监控服务类
+ * 商品监控服务实现类
  * 
  */
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class ProductService {
+public class ProductService implements IProductService {
 
     private final TtsProductMonitorMapper productMapper;
     private final TtsApiClient ttsApiClient;
