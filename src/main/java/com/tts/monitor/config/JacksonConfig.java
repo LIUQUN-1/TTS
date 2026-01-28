@@ -30,10 +30,6 @@ public class JacksonConfig {
         // 允许空对象
         mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
         
-        // 使用 snake_case 命名策略（与 TTS API 保持一致）
-        // 注意：这会影响全局，如果需要，可以只在特定DTO上使用 @JsonProperty
-        // mapper.setPropertyNamingStrategy(PropertyNamingStrategies.SNAKE_CASE);
-        
         return mapper;
     }
 }

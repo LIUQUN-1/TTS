@@ -285,6 +285,6 @@ public class ProductService {
      * 统计总商品数量
      */
     public Long countTotalProducts() {
-        return productMapper.countTotalProducts();
+        return productMapper.selectCount(null);
     }
 }
