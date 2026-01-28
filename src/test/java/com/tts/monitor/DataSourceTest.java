@@ -14,7 +14,7 @@ public class DataSourceTest {
     public void testDataSourceConnection() throws SQLException {
         HikariConfig config = new HikariConfig();
         config.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        config.setJdbcUrl("jdbc:mysql://101.132.36.28:3306/tts?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true");
+        config.setJdbcUrl("jdbc:mysql://101.132.36.28:3567/tts?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true");
         config.setUsername("root");
         config.setPassword("123");
         config.setMinimumIdle(5);
