@@ -39,17 +39,4 @@ public class ProductQueryDTO {
      */
     private Integer confirmStatus;
 
-    /**
-     * 获取偏移量
-     */
-    public int getOffset() {
-        return (page - 1) * size;
-    }
-
-    /**
-     * 获取限制数量
-     */
-    public int getLimit() {
-        return size;
-    }
 }

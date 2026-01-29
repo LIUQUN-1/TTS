@@ -1,6 +1,8 @@
 package com.tts.monitor.service;
 
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.tts.monitor.dto.PageResult;
 import com.tts.monitor.dto.ProductQueryDTO;
@@ -66,20 +68,12 @@ public class ProductService implements IProductService {
         // 按更新时间倒序
         wrapper.orderByDesc(TtsProductMonitor::getUpdatedAt);
         
-        // 查询总数
-        Long total = productMapper.selectCount(wrapper);
-        
-        if (total == 0) {
-            return PageResult.empty(queryDTO.getPage(), queryDTO.getSize());
-        }
-        
         // 分页查询
-        List<TtsProductMonitor> records = productMapper.selectList(
-            wrapper.last("LIMIT " + queryDTO.getOffset() + ", " + queryDTO.getLimit())
-        );
+        Page<TtsProductMonitor> page = new Page<>(queryDTO.getPage(), queryDTO.getSize());
+        IPage<TtsProductMonitor> resultPage = productMapper.selectPage(page, wrapper);
         
-        log.info("查询商品列表成功 - 总数: {}, 当前页: {}", total, queryDTO.getPage());
-        return new PageResult<>(queryDTO.getPage(), queryDTO.getSize(), total, records);
+        log.info("查询商品列表成功 - 总数: {}, 当前页: {}", resultPage.getTotal(), queryDTO.getPage());
+        return new PageResult<>(queryDTO.getPage(), queryDTO.getSize(), resultPage.getTotal(), resultPage.getRecords());
     }
 
     /**
