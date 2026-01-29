@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
 /**
  * 任务控制器
@@ -26,6 +27,7 @@ public class TaskController {
 
     private final IProductCheckService productCheckService;
     private final IAlertService alertService;
+    private final Executor productCheckExecutor;
 
     /**
      * 手动触发商品校验任务
@@ -51,7 +53,7 @@ public class TaskController {
             } catch (Exception e) {
                 log.error("手动校验任务执行异常", e);
             }
-        });
+        }, productCheckExecutor);
         
         Map<String, Object> data = new HashMap<>();
         data.put("status", "started");

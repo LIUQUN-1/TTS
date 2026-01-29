@@ -8,6 +8,7 @@ import com.tts.monitor.entity.TtsProductMonitor;
 import com.tts.monitor.service.IAlertService;
 import com.tts.monitor.service.IProductService;
 import jakarta.validation.Valid;
+import java.util.concurrent.Executor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,7 @@ public class ProductController {
 
     private final IProductService productService;
     private final IAlertService alertService;
+    private final Executor productCheckExecutor;
 
     /**
      * 获取商品监控列表
@@ -58,7 +60,7 @@ public class ProductController {
                 } catch (Exception e) {
                     log.error("新增商品后告警检查失败", e);
                 }
-            });
+            }, productCheckExecutor);
         }
         
         return Result.success("成功新增 " + count + " 个商品", count);
